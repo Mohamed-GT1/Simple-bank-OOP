@@ -1,0 +1,3 @@
+[submodule "vendor/My-Cpp-library"]
+	path = vendor/My-Cpp-library
+	url = https://github.com/Mohamed-GT1/My-Cpp-library.git
