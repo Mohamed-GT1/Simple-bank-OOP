@@ -11,6 +11,7 @@
 #include"TransactionsScreen.h"
 #include"ManageUsersScreen.h"
 #include"Global.h"
+#include"RegisterHistoryScreen.h"
 using namespace std;
 
 class MainScreen : Screen 
@@ -23,6 +24,7 @@ class MainScreen : Screen
 		FindClient,
 		TransactionsMenu,
 		ManageUsersMenu,
+		RegisterHistory,
 		Logout
 
 	};
@@ -58,6 +60,9 @@ class MainScreen : Screen
 	}
 	static void ShowManageUsersScreen() {
 		ManageUsersScreen::ShowManageUsersScreen();
+	}
+	static void ShowRegisterHistoryScreen() {
+		RegisterHistoryScreen::ShowRegisterHistoryScreen();
 	}
 	static void LogUserOut() {
 		CurrentUser = User::GetEmptyUserObject();
@@ -114,6 +119,11 @@ class MainScreen : Screen
 				ShowManageUsersScreen();
 			return;
 		}
+		case MainMenuOptions::RegisterHistory:
+		{
+			ShowRegisterHistoryScreen();
+			break;
+		}
 		case MainMenuOptions::Logout:
 			LogUserOut();
 			return;
@@ -149,10 +159,11 @@ public:
 			cout << "\t" << "[5] Find client.\n";
 			cout << "\t" << "[6] Transactions.\n";
 			cout << "\t" << "[7] Manage Users.\n";
-			cout << "\t" << "[8] Logout.\n";
+			cout << "\t" << "[8] Show register history.\n";
+			cout << "\t" << "[9] Logout.\n";
 			cout << "=======================================\n";
 
-			 option = ReadMainMenuOption(1,8);
+			 option = ReadMainMenuOption(1,9);
 
 			PerformMainMenuOption(option);
 

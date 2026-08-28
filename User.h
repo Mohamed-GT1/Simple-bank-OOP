@@ -540,5 +540,24 @@ public:
 		myfile.close();
 	}
 
+	 
+	 static vector<string> GetRegisterHistoryLinesOfString() {
+		 vector<string> lines;
+
+		 fstream myfile;
+		 myfile.open("LogData.txt", ios::in);
+		 string line = "";
+		 if (myfile.is_open()) {
+
+			 while (getline(myfile, line)) {
+				 lines.push_back(line);
+			 }
+			 myfile.close();
+		 }
+
+		 return lines;  
+
+	 }
+	 //TODO : create a register record struct and replace the needed parts in the code
 };
 
