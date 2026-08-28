@@ -2,6 +2,7 @@
 #include<iostream>
 #include"User.h"
 #include"Global.h"
+#include"Date.h"
 using namespace std;
 
 class Screen
@@ -17,7 +18,10 @@ protected:
 			cout << "\t\t\t\t\t " << title;
 			if (subtitle != "")
 				cout << "\n\t\t\t\t\t " << subtitle;
-			cout << "\n======================================================================================================\n\n\n";
+			cout << "\n======================================================================================================\n";
+			cout << "\t\t\t\t\t User : " << CurrentUser.Username<<endl;
+			cout << "\t\t\t\t\t date : " << Date::GetCurrentDateString() << "\n\n";
+	
 	}
 
 	static void ShowAccessDenied() {
