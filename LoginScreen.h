@@ -13,7 +13,9 @@ class LoginScreen : public Screen
 {
 private:
 
-	static void Login() {
+	static bool Login() {
+
+		int trials = 3;
 		
 		do {
 			
@@ -22,24 +24,35 @@ private:
 			string password = clsInputValidate::ReadString("enter the password : ");
 			CurrentUser = User::FindUser(username, password);
 
-			if (CurrentUser.IsEmptyUser())
-				cout << "invlaid username or password ! try again ";
+			if (CurrentUser.IsEmptyUser()) {
+				cout << "invlaid username or password ! ";
+				trials--;
+				cout << "\nyou have " << trials << " attempts left to login before lock out \n";
+
+				if (trials == 0) {
+					cout << "\n system lockout, too many attempts to log in \n";
+					return false;
+				}
+
+			}
 			else
 				break;
 
 		} while (true);
 
 		MainScreen::ShowMainMenu();
+		return true;
 	}
 
 public:
 
-	static void ShowLoginScreen() {
-		
+	static bool ShowLoginScreen() {
+		bool successLogin;
 			
 			DrawHeader("Login Screen");
-			Login();
-		
+			successLogin = Login();
+
+			return successLogin;
 	}
 
 };

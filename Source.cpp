@@ -9,11 +9,12 @@
 using namespace std;
 
 int main() {
-	
+	bool notlockout = true;
 	//MainScreen::ShowMainMenu();
-	while (true) {
-		LoginScreen::ShowLoginScreen();
-	}
+	do{
+		notlockout = LoginScreen::ShowLoginScreen();
+
+	} while (notlockout);
 	
 
 	return 0;
