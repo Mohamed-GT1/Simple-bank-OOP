@@ -526,7 +526,19 @@ public:
 		return false;
 	}
 
-	
+	 void RegisterLoginInFile() {
+		string record = Date::GetCurrentDateAndTimeString() + "#//#"
+			+ Username + "#//#"
+			+ Password + "#//#"
+			+ to_string(PermissionGranted);
+
+		fstream myfile;
+		myfile.open("LogData.txt", ios::out | ios::app);
+		if (myfile.is_open()) {
+			myfile << record << endl;
+		}
+		myfile.close();
+	}
 
 };
 

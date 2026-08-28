@@ -7,12 +7,16 @@
 #include"User.h"
 #include"Global.h"
 #include"MainScreen.h"
+#include"Date.h"
+#include<fstream>
 using namespace std;
 
 class LoginScreen : public Screen
 {
 private:
 
+	
+	
 	static bool Login() {
 
 		int trials = 3;
@@ -35,8 +39,10 @@ private:
 				}
 
 			}
-			else
+			else {
+				CurrentUser.RegisterLoginInFile();
 				break;
+			}
 
 		} while (true);
 
