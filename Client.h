@@ -472,9 +472,12 @@ public :
 
 	}
 
-	void Deposit(double amount) {
+	bool Deposit(double amount) {
 		Balance += amount;
-		Save();
+		if (Save() == SaveResult::SuccessFull)
+			return true;
+
+		return false;
 	}
 
 	bool Withdraw(double amount) {
@@ -483,8 +486,10 @@ public :
 		}
 		else {
 			Balance -= amount;
-			Save();
-			return true;
+			if (Save() == SaveResult::SuccessFull)
+				return true;
+
+			return false;
 		}
 	}
 
@@ -498,6 +503,26 @@ public :
 		}
 
 		return total;
+	}
+
+	static bool TransFromClient1ToClient2(Client &client1,Client &client2,double amount) {
+		
+		if (!client1.Withdraw(amount))
+			return false;
+		if (!client2.Deposit(amount))
+			return false;
+
+		return true;
+
+	}
+
+	static string ReadAccountNumber(string message) {
+		string accountNumber = clsInputValidate::ReadString(message);
+		while (!Client::DoesClientExist(accountNumber)) {
+			accountNumber = clsInputValidate::ReadString("accont number doesnt exists , try again ");
+		}
+
+		return accountNumber;
 	}
 	
 };
