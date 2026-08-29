@@ -532,41 +532,77 @@ public:
 
 		return false;
 	}
+	struct LoginRecord
+	{
+		string DateAndTime;
+		string username;
+		string password;
+		int permissionGranted;
 
-	 void RegisterLoginInFile() {
-		string record = Date::GetCurrentDateAndTimeString() + "#//#"
-			+ Username + "#//#"
-			+ clsUtil::EncryptText(Password,5) + "#//#"
-			+ to_string(PermissionGranted);
+	};
+
+	static string convertLoginRecordToLineString(LoginRecord loginRecord) {
+
+		string lineString = Date::GetCurrentDateAndTimeString() + "#//#"
+					+ loginRecord.username + "#//#"
+					+ clsUtil::EncryptText(loginRecord.password,5) + "#//#"
+					+ to_string(loginRecord.permissionGranted);
+
+		return lineString;
+	}
+	static LoginRecord ConvertLineStringToLoginRecord(string lineString) {
+		vector<string> data = clsString::SplitString(lineString, "#//#");
+		LoginRecord loginRecord;
+		loginRecord.DateAndTime = data[0];
+		loginRecord.username = data[1];
+		loginRecord.password = clsUtil::DecryptText(data[2],5);
+		loginRecord.permissionGranted = stoi(data[3]);
+
+		return loginRecord;
+
+	}
+
+	static vector<LoginRecord> GetLoginRecordsHistory() {
+		vector<LoginRecord> records;
+
+		fstream myfile;
+		myfile.open("LogData.txt", ios::in);
+		string line = "";
+		if (myfile.is_open()) {
+
+			while (getline(myfile, line)) {
+				records.push_back(ConvertLineStringToLoginRecord(line));
+			}
+			myfile.close();
+		}
+
+		return records;
+
+	}
+	
+	
+	void RegisterLoginInFile() {
+
+		LoginRecord loginRecord;
+		loginRecord.DateAndTime = Date::GetCurrentDateAndTimeString();
+		loginRecord.username = Username;
+		loginRecord.password = Password;
+		loginRecord.permissionGranted = PermissionGranted;
+
 
 		fstream myfile;
 		myfile.open("LogData.txt", ios::out | ios::app);
 		if (myfile.is_open()) {
-			myfile << record << endl;
+			myfile << convertLoginRecordToLineString(loginRecord) << endl;
 		}
 		myfile.close();
 	}
 
 	 
-	 static vector<string> GetRegisterHistoryLinesOfString() {
-		 vector<string> lines;
+	
 
-		 fstream myfile;
-		 myfile.open("LogData.txt", ios::in);
-		 string line = "";
-		 if (myfile.is_open()) {
-
-			 while (getline(myfile, line)) {
-				 lines.push_back(line);
-			 }
-			 myfile.close();
-		 }
-
-		 return lines;  
-
-	 }
-
-	 static void ConvertToEncryption() {
+	 //only used it once for converting my un-encrypted file to encrypted 
+	 /*static void ConvertToEncryption() {
 		 vector<User> users = LoadUsersFromFile();
 
 		 
@@ -594,7 +630,9 @@ public:
 		 }
 
 		 myfile.close();
-	 }
-	 //TODO : create a register record struct and replace the needed parts in the code
+	 }*/
+	 
+
+	
 };
 
