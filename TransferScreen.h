@@ -48,18 +48,7 @@ public:
 		}
 
 
-		if (Client::TransFromClient1ToClient2(client1, client2, amount)) {
-
-			Client::TransferRecordObject object;
-			object.DateAndTime = Date::GetCurrentDateAndTimeString();
-			object.accountNumberFrom = client1.AccountNumber;
-			object.accountNumberTo = client2.AccountNumber;
-			object.amount = amount;
-			object.balanceFrom = client1.Balance;
-			object.balanceTo = client2.Balance;
-			object.user = CurrentUser.Username;
-			Client::LogTransferRecordInFile(object);
-
+		if (Client::TransferFromClient1ToClient2(client1, client2, amount,CurrentUser.Username)) {
 			cout << "\nsuccessfull transfer \n\n";
 			printClientCard(client1);
 			printClientCard(client2);

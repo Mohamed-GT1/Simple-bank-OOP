@@ -1,7 +1,5 @@
 #pragma once
 #include<iostream>
-#include"Client.h"
-#include"Screen.h"
 #include"clsInputValidate.h"
 #include<string>
 #include"Person.h"

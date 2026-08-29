@@ -7,7 +7,7 @@
 #include<string>
 #include"clsInputValidate.h"
 #include"clsUtil.h"
-
+#include"User.h"
 
 
 
@@ -509,14 +509,22 @@ public :
 		return total;
 	}
 
-	static bool TransFromClient1ToClient2(Client &client1,Client &client2,double amount) {
+	static bool TransferFromClient1ToClient2(Client &client1,Client &client2,double amount,string username) {
 		
 		if (!client1.Withdraw(amount))
 			return false;
 		if (!client2.Deposit(amount))
 			return false;
 
-
+		Client::TransferRecordObject object;
+		object.DateAndTime = Date::GetCurrentDateAndTimeString();
+		object.accountNumberFrom = client1.AccountNumber;
+		object.accountNumberTo = client2.AccountNumber;
+		object.amount = amount;
+		object.balanceFrom = client1.Balance;
+		object.balanceTo = client2.Balance;
+		object.user = username;
+		Client::LogTransferRecordInFile(object);
 		
 		return true;
 
