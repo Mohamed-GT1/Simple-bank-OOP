@@ -10,6 +10,8 @@ using namespace std;
 class TransferScreen : public Screen
 {
 private : 
+	
+
 	static void printClientCard(Client client) {
 		cout << "=================================\n";
 		cout << "full name        : " << client.FullName() << endl;
@@ -18,6 +20,8 @@ private :
 		cout << "balance          : " << client.Balance << endl;
 		cout << "=================================\n\n";
 	}
+
+	
 
 public:
 	static void ShowTransferScreen() {
@@ -37,7 +41,25 @@ public:
 			amount= clsInputValidate::ReadDoubleNumber("the amount exceeds the client balance , try again");
 		}
 
+		char answer = clsInputValidate::ReadChar("are you sure you want to perform this transfer operation? [y] [n] ");
+		if (answer == 'n' || answer == 'N') {
+			cout << "\ntransfer cancelled\n";
+			return;
+		}
+
+
 		if (Client::TransFromClient1ToClient2(client1, client2, amount)) {
+
+			Client::TransferRecordObject object;
+			object.DateAndTime = Date::GetCurrentDateAndTimeString();
+			object.accountNumberFrom = client1.AccountNumber;
+			object.accountNumberTo = client2.AccountNumber;
+			object.amount = amount;
+			object.balanceFrom = client1.Balance;
+			object.balanceTo = client2.Balance;
+			object.user = CurrentUser.Username;
+			Client::LogTransferRecordInFile(object);
+
 			cout << "\nsuccessfull transfer \n\n";
 			printClientCard(client1);
 			printClientCard(client2);

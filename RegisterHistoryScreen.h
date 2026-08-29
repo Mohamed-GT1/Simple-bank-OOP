@@ -18,7 +18,7 @@ public:
 		vector<string> lines = User::GetRegisterHistoryLinesOfString();
 
 
-		cout << "				list of (" << lines.size() << ") clients\n";
+		cout << "				list of (" << lines.size() << ") Records\n";
 		cout << "----------------------------------------------------------------------------------\n";
 		cout << left <<setw(25) <<"Date/time"<<setw(2)<<"|"
 			<< setw(15) << "username" << setw(2) << "|"

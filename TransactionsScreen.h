@@ -7,6 +7,7 @@
 #include"WithdrawScreen.h"
 #include"AllClientsBalanceScreen.h"
 #include"TransferScreen.h"
+#include"TransferHistoryScreen.h"
 using namespace std;
 
 class TransactionsScreen : public Screen
@@ -19,7 +20,8 @@ public:
 		Withdraw = 2,
 		TotalBalance = 3,
 		Transfer = 4,
-		Exit = 5
+		TransferHistory = 5,
+		Exit = 6
 
 	};
 
@@ -40,6 +42,9 @@ public:
 	static void ShowTransferScreen() {
 		TransferScreen::ShowTransferScreen();
 	}
+	static void ShowTransferHistoryScreen() {
+		TransferHistoryScreen::ShowTransferHistoryScreen();
+	}
 
 	static void PerformTransactionMenuOption(TransactionMenu option) {
 		system("cls");
@@ -56,6 +61,9 @@ public:
 			break;
 		case(TransactionMenu::Transfer):
 			ShowTransferScreen();
+			break;
+		case(TransactionMenu::TransferHistory):
+			ShowTransferHistoryScreen();
 			break;
 		case(TransactionMenu::Exit):
 			return;
@@ -80,10 +88,11 @@ public:
 			cout << "\t" << "[2] Withdraw.\n";
 			cout << "\t" << "[3] Total Balances.\n";
 			cout << "\t" << "[4] Transfer.\n";
-			cout << "\t" << "[5] Exit.\n";
+			cout << "\t" << "[5] transfer history.\n";
+			cout << "\t" << "[6] Exit.\n";
 			cout << "=======================================\n";
 
-			 option = ReadTransactionMenuOptions(1, 5);
+			 option = ReadTransactionMenuOptions(1, 6);
 
 			PerformTransactionMenuOption(option);
 		} while (option != TransactionMenu::Exit);

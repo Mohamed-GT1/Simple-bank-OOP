@@ -101,5 +101,8 @@
     <ClInclude Include="TransferScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TransferHistoryScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

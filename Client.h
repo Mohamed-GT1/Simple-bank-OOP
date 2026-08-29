@@ -8,6 +8,9 @@
 #include"clsInputValidate.h"
 #include"clsUtil.h"
 
+
+
+
 using namespace std;
 class Client : public Person
 {
@@ -46,6 +49,7 @@ private:
 		line += client._accountNumber+"#//#";
 		line += client._pincode+"#//#";
 		line += to_string(client._balance);
+		
 
 		return line;
 
@@ -512,6 +516,8 @@ public :
 		if (!client2.Deposit(amount))
 			return false;
 
+
+		
 		return true;
 
 	}
@@ -524,6 +530,71 @@ public :
 
 		return accountNumber;
 	}
+
+	struct TransferRecordObject {
+		string DateAndTime;
+		string accountNumberFrom;
+		string accountNumberTo;
+		double amount;
+		double balanceFrom;
+		double balanceTo;
+		string user;
+	};
+
+	static string ConvertTransferRecordObjectToString(TransferRecordObject object) {
+		string line = "";
+		line += object.DateAndTime + "#//#"
+			+ object.accountNumberFrom + "#//#"
+			+ object.accountNumberTo + "#//#"
+			+ to_string(object.amount) + "#//#"
+			+ to_string(object.balanceFrom) + "#//#"
+			+ to_string(object.balanceTo) + "#//#"
+			+ object.user;
+
+		return line;
+	}
+
+	static TransferRecordObject ConvertStringToTransferRecordObject(string line) {
+		vector<string> data = clsString::SplitString(line, "#//#");
+		TransferRecordObject object;
+		object.DateAndTime = data[0];
+		object.accountNumberFrom = data[1];
+		object.accountNumberTo = data[2];
+		object.amount = stod(data[3]);
+		object.balanceFrom = stod(data[4]);
+		object.balanceTo = stod(data[5]);
+		object.user = data[6];
+
+		return object;
+	}
+
+	 static void LogTransferRecordInFile(TransferRecordObject object) {
+		 fstream myfile;
+
+		 myfile.open("transferData.txt", ios::out | ios::app);
+
+		 if (myfile.is_open()) {
+			 myfile << ConvertTransferRecordObjectToString(object) << endl;
+			 myfile.close();
+		 }
+
+	}
+
+	 static vector<TransferRecordObject> LoadTransferRecordObjectsFromFile() {
+		 fstream myfile;
+		 vector<TransferRecordObject> objects;
+		 string line = "";
+		 myfile.open("transferData.txt", ios::in);
+
+		 if (myfile.is_open()) {
+			 while (getline(myfile, line)) {
+				 objects.push_back(ConvertStringToTransferRecordObject(line));
+			 }
+			 myfile.close();
+		 }
+
+		 return objects;
+	 }
 	
 };
 
