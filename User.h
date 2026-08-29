@@ -40,6 +40,8 @@ private:
 
 		string recordString = "";
 
+		user.Password = clsUtil::EncryptText(user.Password, 5);
+
 		recordString += user._username + DELIM
 			+ user._password + DELIM
 			+ to_string(user._permissionGranted) + DELIM
@@ -75,6 +77,8 @@ private:
 	static User ConvertRecordStringToUser(string text) {
 
 		vector<string> data = clsString::SplitString(text, DELIM);
+
+		data[1] = clsUtil::DecryptText(data[1], 5);
 
 		return User(UserMode::updateMode, data[0], data[1], stoi(data[2]), data[3], data[4], data[5], data[6]);
 
@@ -532,7 +536,7 @@ public:
 	 void RegisterLoginInFile() {
 		string record = Date::GetCurrentDateAndTimeString() + "#//#"
 			+ Username + "#//#"
-			+ Password + "#//#"
+			+ clsUtil::EncryptText(Password,5) + "#//#"
 			+ to_string(PermissionGranted);
 
 		fstream myfile;
@@ -560,6 +564,36 @@ public:
 
 		 return lines;  
 
+	 }
+
+	 static void ConvertToEncryption() {
+		 vector<User> users = LoadUsersFromFile();
+
+		 
+		 fstream myfile;
+		 myfile.open("UsersData.txt", ios::out);
+
+		 for (User user : users) {
+			 
+			 string recordString = "";
+
+			 user.Password = clsUtil::EncryptText(user.Password, 5);
+
+			 recordString += user._username + DELIM
+				 + user._password + DELIM
+				 + to_string(user._permissionGranted) + DELIM
+				 + user.FirstName + DELIM
+				 + user.LastName + DELIM
+				 + user.Phone + DELIM
+				 + user.Email;
+
+			 
+			 if (myfile.is_open()) {
+				 myfile << recordString << endl;
+			 }
+		 }
+
+		 myfile.close();
 	 }
 	 //TODO : create a register record struct and replace the needed parts in the code
 };

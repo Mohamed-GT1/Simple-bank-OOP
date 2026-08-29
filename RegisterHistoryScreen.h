@@ -33,7 +33,7 @@ public:
 
 			cout<<left<<setw(25)<<dataOfLine[0]<<setw(2)<<"|"
 				<< setw(15) << dataOfLine[1] << setw(2) << "|"
-				<< setw(15) << dataOfLine[2] << setw(2) << "|"
+				<< setw(15) << clsUtil::DecryptText(dataOfLine[2],5) << setw(2) << "|"
 				<< setw(20) << dataOfLine[3] << setw(2) << "|\n";
 
 		}
