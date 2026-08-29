@@ -22,6 +22,7 @@ public:
 		eToFindClient = 16,
 		eToTransactions = 32,
 		eToManageUsers = 64,
+		eToShowRegisterHistory = 128,
 
 		eAllPermissions = -1
 	};
@@ -121,6 +122,10 @@ private:
 			if (tolower(answer) == 'y')
 				permissionGranted |= PermissionOptions::eToTransactions;
 
+			cout << "\ndo you want to give Show register history permission ? [y] [n] ";
+			cin >> answer;
+			if (tolower(answer) == 'y')
+				permissionGranted |= PermissionOptions::eToShowRegisterHistory;
 			cout << "\ndo you want to give manage users permission ? [y] [n] ";
 			cin >> answer;
 			if (tolower(answer) == 'y')

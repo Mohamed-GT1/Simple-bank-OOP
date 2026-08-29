@@ -121,6 +121,7 @@ class MainScreen : Screen
 		}
 		case MainMenuOptions::RegisterHistory:
 		{
+			if(CheckHasAccess(User::PermissionOptions::eToShowRegisterHistory))
 			ShowRegisterHistoryScreen();
 			break;
 		}
