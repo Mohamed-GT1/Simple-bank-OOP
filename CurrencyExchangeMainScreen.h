@@ -2,6 +2,7 @@
 #include<iostream>
 #include"Screen.h"
 #include"AllCurrenciesScreen.h"
+#include"FindCurrencyScreen.h"
 using namespace std;
 
 class CurrencyExchangeMainScreen : public Screen
@@ -31,7 +32,7 @@ class CurrencyExchangeMainScreen : public Screen
 			AllCurrenciesScreen::ShowAllCurrenciesScreen();
 		}
 		static void ShowFindCurrencyScreen() {
-			cout << "show find currency screen will be here \n";
+			FindCurrencyScreen::ShowFindCurrencyScreen();
 		}
 		static void ShowUpdateCurrencyScreen() {
 			cout << "update currency screen will be here \n";
