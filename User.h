@@ -598,41 +598,6 @@ public:
 		myfile.close();
 	}
 
-	 
-	
-
-	 //only used it once for converting my un-encrypted file to encrypted 
-	 /*static void ConvertToEncryption() {
-		 vector<User> users = LoadUsersFromFile();
-
-		 
-		 fstream myfile;
-		 myfile.open("UsersData.txt", ios::out);
-
-		 for (User user : users) {
-			 
-			 string recordString = "";
-
-			 user.Password = clsUtil::EncryptText(user.Password, 5);
-
-			 recordString += user._username + DELIM
-				 + user._password + DELIM
-				 + to_string(user._permissionGranted) + DELIM
-				 + user.FirstName + DELIM
-				 + user.LastName + DELIM
-				 + user.Phone + DELIM
-				 + user.Email;
-
-			 
-			 if (myfile.is_open()) {
-				 myfile << recordString << endl;
-			 }
-		 }
-
-		 myfile.close();
-	 }*/
-	 
-
 	
 };
 

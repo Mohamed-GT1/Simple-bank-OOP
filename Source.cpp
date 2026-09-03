@@ -7,20 +7,24 @@
 #include"Global.h"
 #include<ctime>
 #include"Date.h"
+#include"Currency.h"
 
 using namespace std;
 
 int main() {
 
-	bool notlockout = true;
-	//MainScreen::ShowMainMenu();
+	/*bool notlockout = true;
+	
 	do{
 		notlockout = LoginScreen::ShowLoginScreen();
 
-	} while (notlockout);
+	} while (notlockout);*/
 	
+	Currency::ShowAllCurrencies();
 
-	//User::ConvertToEncryption();
+	Currency currency = Currency::FindByCode(clsInputValidate::ReadString("enter the country to find"));
+	currency.PrintCurrencyCard();
+	Currency::UpdateCurrencyRate();
 
 	return 0;
 }
