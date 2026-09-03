@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include"Screen.h"
+#include"AllCurrenciesScreen.h"
 using namespace std;
 
 class CurrencyExchangeMainScreen : public Screen
@@ -25,9 +26,9 @@ class CurrencyExchangeMainScreen : public Screen
 			return (CurrencyExchangeOptions)number;
 		}
 
-		static void ShowAllCurrernciesScreen() {
+		static void ShowAllCurrenciesScreen() {
 			
-			cout << "show all currencies screen will be here \n";
+			AllCurrenciesScreen::ShowAllCurrenciesScreen();
 		}
 		static void ShowFindCurrencyScreen() {
 			cout << "show find currency screen will be here \n";
@@ -49,7 +50,7 @@ class CurrencyExchangeMainScreen : public Screen
 			switch (option) {
 
 			case CurrencyExchangeOptions::ShowAllCurrencies:
-					ShowAllCurrernciesScreen();
+					ShowAllCurrenciesScreen();
 				break;
 
 			case CurrencyExchangeOptions::FindCurrency:

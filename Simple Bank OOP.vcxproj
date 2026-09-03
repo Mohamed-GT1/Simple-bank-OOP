@@ -134,6 +134,7 @@
     <ClInclude Include="AddNewClientScreen.h" />
     <ClInclude Include="AddNewUserScreen.h" />
     <ClInclude Include="AllClientsBalanceScreen.h" />
+    <ClInclude Include="AllCurrenciesScreen.h" />
     <ClInclude Include="AllUsersScreen.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientListScreen.h" />

@@ -99,36 +99,6 @@ public:
 
 		return currencies;
 	}
-	static void PrintCurrency(Currency currency) {
-		
-
-		cout << left << setw(30) << currency.Country() << setw(2) << "|"
-			<< setw(14) << currency.CurrencyCode() << setw(2) << "|"
-			<< setw(35) << currency.CurrencyName() << setw(2) << "|"
-			<< setw(10) << currency.Rate() << setw(2) << "|";
-				
-	}
-	static void ShowAllCurrencies() {
-
-		vector<Currency> currencies = LoadAllCurrenciesFromFile();
-
-		cout << "				list of (" << currencies.size() << ") currency\n";
-		cout << "------------------------------------------------------------------------------------------------\n";
-		cout << left << setw(30) << "country" << setw(2) << "|"
-			<< setw(14) << "currency code" << setw(2) << "|"
-			<< setw(35) << "currency name" << setw(2) << "|"
-			<< setw(10) << "Rate" << setw(2) << "|";
-		cout << "\n------------------------------------------------------------------------------------------------\n";
-
-		for (Currency currency : currencies) {
-
-			PrintCurrency(currency);
-			cout << endl;
-
-		}
-		cout << "------------------------------------------------------------------------------------------------\n";
-
-	}
 
 	static Currency FindByCode(string code) {
 		vector<Currency> currencies = LoadAllCurrenciesFromFile();
