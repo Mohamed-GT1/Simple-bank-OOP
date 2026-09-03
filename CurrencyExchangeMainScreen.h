@@ -4,6 +4,7 @@
 #include"AllCurrenciesScreen.h"
 #include"FindCurrencyScreen.h"
 #include"UpdateCurrencyRateScreen.h"
+#include"CurrencyCalculatorScreen.h"
 using namespace std;
 
 class CurrencyExchangeMainScreen : public Screen
@@ -39,7 +40,7 @@ class CurrencyExchangeMainScreen : public Screen
 			UpdateCurrencyRateScreen::ShowUpdateCurrencyRateScreen();
 		}
 		static void ShowCurrencyCalculatorScreen() {
-			cout << "currency calculator screen will be here \n";
+			CurrencyCalculatorScreen::ShowCurrencyCalculatorScreen();
 		}
 		
 

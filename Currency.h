@@ -12,7 +12,7 @@ class Currency
 {
 public:
 	enum CurrencyMode {
-		UpdateMode,EmptyMode
+		UpdateMode, EmptyMode
 	};
 private:
 
@@ -22,9 +22,9 @@ private:
 	string currencyName;
 	double rate;
 
-	
+
 public:
-	Currency(CurrencyMode mode,string country ,string currencyCode,string currencyName,double rate) {
+	Currency(CurrencyMode mode, string country, string currencyCode, string currencyName, double rate) {
 		this->mode = mode;
 		this->country = country;
 		this->currencyCode = currencyCode;
@@ -50,7 +50,7 @@ public:
 		rate = newRate;
 		UpdateSystem();
 		return true;
-		
+
 	}
 
 	static string ConvertCurrencyToString(Currency currency) {
@@ -113,7 +113,7 @@ public:
 	}
 
 	static Currency FindByCountry(string country) {
-		
+
 		vector<Currency> currencies = LoadAllCurrenciesFromFile();
 
 		for (Currency currency : currencies) {
@@ -125,76 +125,91 @@ public:
 		return GetEmptyCurrencyObject();
 	}
 
-	 void PrintCurrencyCard() {
+	void PrintCurrencyCard() {
 		cout << "==========================\n";
-		cout << "country name  : " << country<<endl;
-		cout << "currency code : " << currencyCode<<endl;
-		cout << "currency name : " << currencyName<<endl;
-		cout << "Rate          : " << rate<<endl;
+		cout << "country name  : " << country << endl;
+		cout << "currency code : " << currencyCode << endl;
+		cout << "currency name : " << currencyName << endl;
+		cout << "Rate          : " << rate << endl;
 		cout << "\n==========================\n";
 	}
 
-	 void UpdateNewCurrenciesInFile(vector<Currency> currencies) {
-		 fstream myfile;
-		 myfile.open("Currencies.txt", ios::out);
-		
+	void UpdateNewCurrenciesInFile(vector<Currency> currencies) {
+		fstream myfile;
+		myfile.open("Currencies.txt", ios::out);
 
-		 if (myfile.is_open()) {
-			 for (Currency currency : currencies) {
-				 myfile << ConvertCurrencyToString(currency) << endl;
-			 }
-			 myfile.close();
-		 }
 
-	 }
+		if (myfile.is_open()) {
+			for (Currency currency : currencies) {
+				myfile << ConvertCurrencyToString(currency) << endl;
+			}
+			myfile.close();
+		}
 
-	 void UpdateSystem() {
-		 vector<Currency> currencies = LoadAllCurrenciesFromFile();
-		 for (Currency& currency : currencies) {
-			 if (currency.currencyCode == this->currencyCode)
-				 currency = *this;
-		 }
-		 UpdateNewCurrenciesInFile(currencies);
+	}
 
-	 }
+	void UpdateSystem() {
+		vector<Currency> currencies = LoadAllCurrenciesFromFile();
+		for (Currency& currency : currencies) {
+			if (currency.currencyCode == this->currencyCode)
+				currency = *this;
+		}
+		UpdateNewCurrenciesInFile(currencies);
 
-	 static void UpdateCurrencyRate() {
-		 cout << "dow do you want to search for the currency ? by code[1] by country [2]\n";
-		 int answer = clsInputValidate::ReadIntNumberBetween(1, 2);
-		 Currency currency = GetEmptyCurrencyObject();
+	}
 
-		 switch (answer) {
-		 case 1:
-			  currency = FindByCode(clsInputValidate::ReadString("enter the code of the currency you wish yo update"));
-			 break;
-		 case 2:
-			  currency = FindByCountry(clsInputValidate::ReadString("enter the country of the currency you wish yo update"));
-			 break;
-		 }
+	static void UpdateCurrencyRate() {
+		cout << "dow do you want to search for the currency ? by code[1] by country [2]\n";
+		int answer = clsInputValidate::ReadIntNumberBetween(1, 2);
+		Currency currency = GetEmptyCurrencyObject();
 
-		 currency.PrintCurrencyCard();
+		switch (answer) {
+		case 1:
+			currency = FindByCode(clsInputValidate::ReadString("enter the code of the currency you wish yo update"));
+			break;
+		case 2:
+			currency = FindByCountry(clsInputValidate::ReadString("enter the country of the currency you wish yo update"));
+			break;
+		}
 
-		 double newRate = clsInputValidate::ReadDoubleNumber("enter the new rate you wish to update to");
-		 if (!currency.UpdateRate(newRate)) {
-			 cout << "\ninvalid rate , didnt update\n";
-			 return;
-		 }
+		currency.PrintCurrencyCard();
 
-		 
-		 cout << "\nsuccessful\n"; 
-		 currency.PrintCurrencyCard();
-		 
-	 }
+		double newRate = clsInputValidate::ReadDoubleNumber("enter the new rate you wish to update to");
+		if (!currency.UpdateRate(newRate)) {
+			cout << "\ninvalid rate , didnt update\n";
+			return;
+		}
 
-	  bool IsEmpty() {
-		  return mode == CurrencyMode::EmptyMode;
-	 }
 
-	  static bool DoesCurrencyExist(string currencyCode) {
-		  
-		  Currency currency = FindByCode(currencyCode);
-		  return !(currency.IsEmpty());
-	  }
+		cout << "\nsuccessful\n";
+		currency.PrintCurrencyCard();
+
+	}
+
+	bool IsEmpty() {
+		return mode == CurrencyMode::EmptyMode;
+	}
+
+	static bool DoesCurrencyExist(string currencyCode) {
+
+		Currency currency = FindByCode(currencyCode);
+		return !(currency.IsEmpty());
+	}
+
+	double ConvertToUSD(double amount) {
+		return amount / Rate();
+	}
+
+
+	double ConvertToOtherCurrency(double amount, Currency currency2) {
+		double amountInUSD = ConvertToUSD(amount);
+
+		if (currency2.currencyCode == "USD")
+			return amountInUSD;
+
+		return amountInUSD * currency2.Rate();
+	}
+
 	
 };
 

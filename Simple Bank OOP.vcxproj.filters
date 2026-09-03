@@ -119,5 +119,8 @@
     <ClInclude Include="UpdateCurrencyRateScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CurrencyCalculatorScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
