@@ -3,6 +3,7 @@
 #include"Screen.h"
 #include"AllCurrenciesScreen.h"
 #include"FindCurrencyScreen.h"
+#include"UpdateCurrencyRateScreen.h"
 using namespace std;
 
 class CurrencyExchangeMainScreen : public Screen
@@ -34,8 +35,8 @@ class CurrencyExchangeMainScreen : public Screen
 		static void ShowFindCurrencyScreen() {
 			FindCurrencyScreen::ShowFindCurrencyScreen();
 		}
-		static void ShowUpdateCurrencyScreen() {
-			cout << "update currency screen will be here \n";
+		static void ShowUpdateCurrencyRateScreen() {
+			UpdateCurrencyRateScreen::ShowUpdateCurrencyRateScreen();
 		}
 		static void ShowCurrencyCalculatorScreen() {
 			cout << "currency calculator screen will be here \n";
@@ -58,7 +59,7 @@ class CurrencyExchangeMainScreen : public Screen
 					ShowFindCurrencyScreen();
 				break;
 			case CurrencyExchangeOptions::UpdateCurrencyRate:
-					ShowUpdateCurrencyScreen();
+					ShowUpdateCurrencyRateScreen();
 				break;
 			case CurrencyExchangeOptions::CurrencyCalculator:
 					ShowCurrencyCalculatorScreen();
