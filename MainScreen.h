@@ -12,6 +12,7 @@
 #include"ManageUsersScreen.h"
 #include"Global.h"
 #include"RegisterHistoryScreen.h"
+#include"CurrencyExchangeMainScreen.h"
 using namespace std;
 
 class MainScreen : Screen 
@@ -25,6 +26,7 @@ class MainScreen : Screen
 		TransactionsMenu,
 		ManageUsersMenu,
 		RegisterHistory,
+		CurrencyExchangeMenu,
 		Logout
 
 	};
@@ -63,6 +65,9 @@ class MainScreen : Screen
 	}
 	static void ShowRegisterHistoryScreen() {
 		RegisterHistoryScreen::ShowRegisterHistoryScreen();
+	}
+	static void ShowCurrencyExchangeMenuScreen() {
+		CurrencyExchangeMainScreen::ShowCurrencyExchangeMainScreen();
 	}
 	static void LogUserOut() {
 		CurrentUser = User::GetEmptyUserObject();
@@ -125,6 +130,16 @@ class MainScreen : Screen
 			ShowRegisterHistoryScreen();
 			break;
 		}
+		case MainMenuOptions::CurrencyExchangeMenu:
+		{
+			if(!CheckHasAccess(User::PermissionOptions::eToCurrencyExchange)) {
+				cout << "\npress any key to go back . . . ";
+				system("pause>nul");
+			}
+			else
+			ShowCurrencyExchangeMenuScreen();
+			return;
+		}
 		case MainMenuOptions::Logout:
 			LogUserOut();
 			return;
@@ -161,10 +176,11 @@ public:
 			cout << "\t" << "[6] Transactions.\n";
 			cout << "\t" << "[7] Manage Users.\n";
 			cout << "\t" << "[8] Show register history.\n";
-			cout << "\t" << "[9] Logout.\n";
+			cout << "\t" << "[9] Currency exchange.\n";
+			cout << "\t" << "[10] Logout.\n";
 			cout << "=======================================\n";
 
-			 option = ReadMainMenuOption(1,9);
+			 option = ReadMainMenuOption(1,10);
 
 			PerformMainMenuOption(option);
 

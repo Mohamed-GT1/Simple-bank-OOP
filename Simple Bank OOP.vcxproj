@@ -138,6 +138,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientListScreen.h" />
     <ClInclude Include="Currency.h" />
+    <ClInclude Include="CurrencyExchangeMainScreen.h" />
     <ClInclude Include="DeleteClientScreen.h" />
     <ClInclude Include="DeleteUserScreen.h" />
     <ClInclude Include="DepositScreen.h" />

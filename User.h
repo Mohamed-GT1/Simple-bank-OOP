@@ -21,6 +21,7 @@ public:
 		eToTransactions = 32,
 		eToManageUsers = 64,
 		eToShowRegisterHistory = 128,
+		eToCurrencyExchange = 256,
 
 		eAllPermissions = -1
 	};
@@ -132,6 +133,10 @@ private:
 			cin >> answer;
 			if (tolower(answer) == 'y')
 				permissionGranted |= PermissionOptions::eToManageUsers;
+			cout << "\ndo you want to give currency exchange permission ? [y] [n] ";
+			cin >> answer;
+			if (tolower(answer) == 'y')
+				permissionGranted |= PermissionOptions::eToCurrencyExchange;
 
 
 

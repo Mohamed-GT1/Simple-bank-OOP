@@ -13,18 +13,14 @@ using namespace std;
 
 int main() {
 
-	/*bool notlockout = true;
+	bool notlockout = true;
 	
 	do{
 		notlockout = LoginScreen::ShowLoginScreen();
 
-	} while (notlockout);*/
+	} while (notlockout);
 	
-	Currency::ShowAllCurrencies();
 
-	Currency currency = Currency::FindByCode(clsInputValidate::ReadString("enter the country to find"));
-	currency.PrintCurrencyCard();
-	Currency::UpdateCurrencyRate();
 
 	return 0;
 }

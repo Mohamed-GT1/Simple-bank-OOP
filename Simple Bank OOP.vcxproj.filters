@@ -104,5 +104,11 @@
     <ClInclude Include="TransferHistoryScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Currency.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrencyExchangeMainScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
